@@ -16,7 +16,7 @@ services:
 
 
   #  lets try another approach
-  react-app:
+  vite-react:
     build: ./vite-react
     container_name: vite_app
     ports:
@@ -28,7 +28,9 @@ services:
     # --------> use polling for file changes
       - CHOKIDAR_USEPOLLING=true  
 
-  server:
+
+
+  express:
     build: ./express
     container_name: express_app
     ports:
@@ -38,3 +40,17 @@ services:
       - /app/node_modules
     environment:
       - CHOKIDAR_USEPOLLING=true
+
+
+
+  create-react-app:
+    build: ./create-react-app
+    container_name: create_react_app
+    ports:
+      - "5173:5173"
+    volumes:
+      - "./create-react-app:/app:delagated"
+      - /app/node_modules
+    environment:
+    # --------> use polling for file changes
+      - CHOKIDAR_USEPOLLING=true 
